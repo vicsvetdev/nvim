@@ -1,0 +1,1 @@
+/home/vicsvet/.config/omarchy/current/theme/neovim.lua
