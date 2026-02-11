@@ -21,6 +21,8 @@ return {
         opts = {
           ensure_installed = {
             "lua_ls",
+            "gopls",
+            "rust_analyzer",
             "ts_ls",
           },
           automatic_installation = true,
