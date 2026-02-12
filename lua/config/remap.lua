@@ -52,6 +52,3 @@ map({ "n", "v" }, "P", '"+p', { noremap = true, silent = true })
 -- Quickfix navigation
 map("n", "<M-j>", "<cmd>cnext<CR>")
 map("n", "<M-k>", "<cmd>cprev<CR>")
-
--- easy-dotnet
--- map("n", "<F3>", function() require("easy-dotnet").testrunner() end)
