@@ -1,3 +1,5 @@
+vim.lsp.set_log_level("WARN")
+
 vim.opt.tabstop = 4
 vim.opt.wrap = false
 

@@ -26,6 +26,16 @@ map("n", "<leader>fe", function() require("fzf-lua").oldfiles({ cwd_only = true,
 map("n", "<leader>fr", function() require("fzf-lua").resume() end)
 
 -- LSP keymaps
+map("n", "K", function()
+  local docs = require("noice.lsp.docs")
+  local hover_msg = docs._messages and docs._messages["hover"]
+  if hover_msg and hover_msg:win() then
+    docs.hide(hover_msg)
+    return
+  end
+  vim.lsp.buf.hover()
+end)
+
 map("n", "<leader>gi", function() require("fzf-lua").lsp_implementations() end)
 map("n", "<leader>gd", function() require("fzf-lua").lsp_definitions() end)
 map("n", "<leader>gt", function() require("fzf-lua").lsp_typedefs() end)
@@ -45,9 +55,23 @@ map("n", "<leader>gE", function()
   })
 end)
 
--- Copy/Paste to system register
+-- Copy/Paste to system register via Omarchy SUPER+C/SUPER+V (Ctrl/Shift+Insert)
 map({ "n", "v" }, "Y", '"+y', { noremap = true, silent = true })
-map({ "n", "v" }, "P", '"+p', { noremap = true, silent = true })
+map("n", "<C-Insert>", '"+yy', { noremap = true, silent = true })
+map("v", "<C-Insert>", '"+y', { noremap = true, silent = true })
+map("i", "<C-Insert>", '<C-o>"+yy', { noremap = true, silent = true })
+map("t", "<C-Insert>", [[<C-\><C-N>"+yyi]], { noremap = true, silent = true })
+
+map("n", "<S-Insert>", '"+p', { noremap = true, silent = true })
+map("v", "<S-Insert>", '"+p', { noremap = true, silent = true })
+map("i", "<S-Insert>", '<C-r>+', { noremap = true, silent = true })
+map("t", "<S-Insert>", function()
+  local text = vim.fn.getreg("+")
+  local job_id = vim.b.terminal_job_id
+  if job_id then
+    vim.api.nvim_chan_send(job_id, text)
+  end
+end, { noremap = true, silent = true })
 
 -- Quickfix navigation
 map("n", "<M-j>", "<cmd>cnext<CR>")
