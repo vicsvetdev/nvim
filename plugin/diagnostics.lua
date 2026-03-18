@@ -1,3 +1,17 @@
+vim.diagnostic.config({
+  virtual_text = {
+    prefix = "■",
+    source = "if_many",
+  },
+  signs = true,
+  underline = true,
+  severity_sort = true,
+  float = {
+    border = "rounded",
+    source = "always",
+  },
+})
+
 local group = vim.api.nvim_create_augroup("OoO", {})
 local diagnostics_enabled = true
 local diagnostic_float_winid = nil
@@ -83,3 +97,23 @@ function ToggleDiagnosticFloat()
 end
 
 vim.keymap.set("n", "H", ToggleDiagnosticFloat, { desc = "Toggle diagnostic float" })
+
+local virtual_text_enabled = true
+local virtual_text_opts = {
+  prefix = "■",
+  source = "if_many",
+}
+
+local function ToggleDiagnosticVirtualText()
+  if virtual_text_enabled then
+    virtual_text_enabled = false
+    vim.diagnostic.config({ virtual_text = false })
+    print("Diagnostic virtual text disabled")
+  else
+    virtual_text_enabled = true
+    vim.diagnostic.config({ virtual_text = virtual_text_opts })
+    print("Diagnostic virtual text enabled")
+  end
+end
+
+vim.keymap.set("n", "J", ToggleDiagnosticVirtualText, { desc = "Toggle diagnostic virtual text" })
