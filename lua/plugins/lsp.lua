@@ -39,9 +39,15 @@ return {
       },
       {
         "seblyng/roslyn.nvim",
-        ---@module 'roslyn.config'
-        ---@type RoslynNvimConfig
-        opts = {},
+        opts = {
+          filewatching = "roslyn",
+          extensions = {
+            razor = {
+              enabled = false,
+              config = { path = nil },
+            },
+          },
+        },
       },
     },
   },
