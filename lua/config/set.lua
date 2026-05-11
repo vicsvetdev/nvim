@@ -1,5 +1,3 @@
-vim.lsp.set_log_level("WARN")
-
 vim.opt.tabstop = 4
 vim.opt.wrap = false
 
@@ -13,11 +11,9 @@ vim.api.nvim_create_autocmd("TextYankPost", {
 })
 
 vim.opt.hlsearch = false
-vim.opt.incsearch = true
 
 vim.opt.scrolloff = 8
 vim.opt.signcolumn = "yes"
-vim.opt.isfname:append("@-@")
 
 vim.opt.updatetime = 50
 

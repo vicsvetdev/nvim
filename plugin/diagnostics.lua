@@ -3,13 +3,7 @@ vim.diagnostic.config({
     prefix = "■",
     source = "if_many",
   },
-  signs = true,
-  underline = true,
   severity_sort = true,
-  float = {
-    border = "rounded",
-    source = "always",
-  },
 })
 
 local group = vim.api.nvim_create_augroup("OoO", {})
@@ -67,7 +61,7 @@ local function show_diagnostics()
     focusable = false,
     scope = "cursor",
     close_events = { "BufLeave", "CursorMoved", "InsertEnter" },
-    border = "rounded",
+    border = "single",
     max_width = 80,
     source = "always",
     header = severity_headers[severity],

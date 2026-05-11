@@ -24,7 +24,6 @@ return {
           args = { "." },
         },
       },
-      format_on_save = false,
     },
     config = function(_, opts)
       local conform = require("conform")

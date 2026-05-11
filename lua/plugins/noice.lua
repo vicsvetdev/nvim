@@ -4,7 +4,6 @@ return {
     event = "VeryLazy",
     dependencies = {
       "MunifTanjim/nui.nvim",
-      "rcarriga/nvim-notify",
     },
     keys = {
       {
@@ -23,18 +22,15 @@ return {
       },
     },
     config = function()
-      require("notify").setup({
-        top_down = false,
-        render = "wrapped-compact",
-        max_width = function()
-          return math.floor(vim.o.columns * 0.4)
-        end,
-        max_height = function()
-          return math.floor(vim.o.lines * 0.4)
-        end,
-      })
-
       require("noice").setup({
+        messages = {
+          view = "mini",
+          view_error = "mini",
+          view_warn = "mini",
+        },
+        notify = {
+          view = "mini",
+        },
         views = {
           cmdline_popup = {
             position = {
@@ -52,6 +48,24 @@ return {
               },
             },
           },
+          hover = {
+            border = {
+              style = "single",
+            },
+          },
+          mini = {
+            border = {
+              style = "single",
+              padding = { 0, 1 },
+            },
+            position = {
+              row = -2,
+              col = "100%",
+            },
+            win_options = {
+              winblend = 0,
+            },
+          },
         },
         lsp = {
           progress = {
@@ -60,7 +74,6 @@ return {
           override = {
             ["vim.lsp.util.convert_input_to_markdown_lines"] = true,
             ["vim.lsp.util.stylize_markdown"] = true,
-            ["cmp.entry.get_documentation"] = true,
           },
           signature = {
             enabled = false,
@@ -70,8 +83,6 @@ return {
           bottom_search = true,
           command_palette = true,
           long_message_to_split = true,
-          inc_rename = false,
-          lsp_doc_border = true,
         },
       })
     end,

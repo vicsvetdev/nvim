@@ -76,11 +76,6 @@ local function reload_theme()
 	vim.schedule(function()
 		apply_theme()
 
-		local transparency_file = vim.fn.stdpath("config") .. "/plugin/after/transparency.lua"
-		if vim.fn.filereadable(transparency_file) == 1 then
-			vim.cmd.source(transparency_file)
-		end
-
 		vim.api.nvim_exec_autocmds("ColorScheme", { modeline = false })
 		vim.cmd("redraw!")
 	end)

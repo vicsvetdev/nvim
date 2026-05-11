@@ -43,7 +43,6 @@ map("n", "<leader>fu", function() require("fzf-lua").lsp_references() end)
 map("n", "<leader>ca", function() require("fzf-lua").lsp_code_actions() end)
 map("v", "<leader>ca", function() require("fzf-lua").lsp_code_actions() end)
 map("n", "<leader>rr", vim.lsp.buf.rename)
-map("n", "<leader>cc", function() require("conform").format() end)
 map("n", "<leader>ge", function()
   require("fzf-lua").lsp_document_diagnostics({
     severity_limit = vim.diagnostic.severity.ERROR,
