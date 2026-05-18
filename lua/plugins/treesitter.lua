@@ -1,15 +1,9 @@
 return {
   {
-    "nvim-treesitter/nvim-treesitter",
+    "romus204/tree-sitter-manager.nvim",
     lazy = false,
-    build = ":TSUpdate",
     opts = {
-      install_dir = vim.fn.stdpath("data") .. "/site",
-    },
-    config = function(_, opts)
-      local ts = require("nvim-treesitter")
-      ts.setup(opts)
-      local parsers = {
+      ensure_installed = {
         "c_sharp",
         "rust",
         "lua",
@@ -21,15 +15,16 @@ return {
         "rego",
         "terraform",
         "hcl",
-      }
-      ts.install(parsers)
+      },
+      auto_install = false,
+      highlight = false,
+    },
+    config = function(_, opts)
+      require("tree-sitter-manager").setup(opts)
+      vim.treesitter.language.register("terraform", "tf")
+
       vim.api.nvim_create_autocmd("FileType", {
-        callback = function(args)
-          local ft = vim.bo[args.buf].filetype
-          local lang = vim.treesitter.language.get_lang(ft) or ft
-          local ok = pcall(vim.treesitter.language.add, lang)
-          if ok then pcall(vim.treesitter.start, args.buf, lang) end
-        end,
+        callback = function(args) pcall(vim.treesitter.start, args.buf) end,
       })
     end,
   },
