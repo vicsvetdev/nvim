@@ -41,12 +41,6 @@ return {
         "seblyng/roslyn.nvim",
         opts = {
           filewatching = "roslyn",
-          extensions = {
-            razor = {
-              enabled = false,
-              config = { path = nil },
-            },
-          },
         },
       },
     },
