@@ -14,5 +14,7 @@ return {
     vim.keymap.set("n", "<leader>vp", ":Gitsigns preview_hunk<CR>", {})
     vim.keymap.set("n", "<leader>vr", ":Gitsigns reset_hunk<CR>", {})
     vim.keymap.set("n", "<leader>vb", ":Gitsigns toggle_current_line_blame<CR>", {})
+    vim.keymap.set("n", "<leader>vn", ":Gitsigns next_hunk<CR>", {})
+    vim.keymap.set("n", "<leader>vN", ":Gitsigns prev_hunk<CR>", {})
   end,
 }
