@@ -11,18 +11,14 @@ map({ "n", "t" }, "<F2>", function()
   end
 
   if term.buf and vim.api.nvim_buf_is_valid(term.buf) then
-    vim.cmd.vnew()
-    vim.cmd.wincmd("J")
-    vim.api.nvim_win_set_height(0, 20)
+    vim.cmd("botright 20new")
     vim.api.nvim_win_set_buf(0, term.buf)
     term.win = vim.api.nvim_get_current_win()
     vim.cmd.startinsert()
     return
   end
 
-  vim.cmd.vnew()
-  vim.cmd.wincmd("J")
-  vim.api.nvim_win_set_height(0, 20)
+  vim.cmd("botright 20new")
   vim.cmd.term()
   term.win = vim.api.nvim_get_current_win()
   term.buf = vim.api.nvim_get_current_buf()
