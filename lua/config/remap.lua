@@ -15,6 +15,7 @@ map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
 map("n", "n", "nzzzv")
 map("n", "N", "Nzzzv")
+map("n", "/", "<cmd>Noice dismiss<CR>/")
 
 map("n", "<leader>sr", [[:%s/\<<C-r><C-w>\>/<C-r><C-w>/gI<Left><Left><Left>]])
 map("v", "<leader>sr", [[y:%s/<C-r>"/<C-r>"/gI<Left><Left><Left>]])
