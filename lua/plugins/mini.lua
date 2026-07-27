@@ -32,7 +32,19 @@ return {
       local ai = require("mini.ai")
       ai.setup()
 
-      require("mini.pairs").setup()
+      local pairs = require("mini.pairs")
+      pairs.setup()
+
+      vim.api.nvim_create_autocmd("FileType", {
+        pattern = "rust",
+        callback = function(args)
+          pairs.map_buf(args.buf, "i", ">", {
+            action = "close",
+            pair = "<>",
+            register = { bs = false, cr = false },
+          })
+        end,
+      })
     end,
   },
 }
