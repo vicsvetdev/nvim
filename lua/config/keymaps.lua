@@ -5,6 +5,9 @@
 local map = vim.keymap.set
 
 map("n", "<leader>re", "<cmd>e .<CR>")
+map("n", "<leader>e", "<cmd>Oil<CR>")
+
+map("n", "<leader>u", vim.cmd.UndotreeToggle)
 
 map("v", "J", ":m '>+1<CR>gv=gv")
 map("v", "K", ":m '<-2<CR>gv=gv")
@@ -51,8 +54,32 @@ end, { noremap = true, silent = true })
 map("n", "<M-j>", "<cmd>cnext<CR>")
 map("n", "<M-k>", "<cmd>cprev<CR>")
 
--- Deferred to later migration steps:
---   <leader>e  -> Oil            (3d, needs oil.nvim)
---   <leader>u  -> UndotreeToggle (3d, needs undotree)
---   <leader>f* / <leader>g* LSP+picker maps (3c, needs the editor.fzf extra)
---   K          -> noice hover toggle (3e, via opts.servers["*"].keys)
+-- Navigation keymaps. These sit on top of the editor.fzf extra's own bindings,
+-- which stay available (<leader>ff, <leader>fr, <leader>sg, <leader><space>...).
+map("n", "<leader>ff", function() require("fzf-lua").files() end)
+map("n", "<leader>fg", function() require("fzf-lua").live_grep() end)
+map("v", "<leader>fg", function() require("fzf-lua").grep_visual() end)
+map("n", "<leader>fe", function() require("fzf-lua").oldfiles({ cwd_only = true, include_current_session = true }) end)
+map("n", "<leader>fr", function() require("fzf-lua").resume() end)
+
+-- LSP keymaps. K lives in lua/plugins/lsp.lua instead: LazyVim binds it
+-- buffer-locally on LspAttach, which would beat a global mapping.
+map("n", "<leader>gi", function() require("fzf-lua").lsp_implementations() end)
+map("n", "<leader>gd", function() require("fzf-lua").lsp_definitions() end)
+map("n", "<leader>gt", function() require("fzf-lua").lsp_typedefs() end)
+map("n", "<leader>fu", function() require("fzf-lua").lsp_references() end)
+map("n", "<leader>rr", vim.lsp.buf.rename)
+map("n", "<leader>ge", function()
+  require("fzf-lua").lsp_document_diagnostics({
+    severity_limit = vim.diagnostic.severity.ERROR,
+  })
+end)
+map("n", "<leader>gE", function()
+  require("fzf-lua").lsp_workspace_diagnostics({
+    severity_limit = vim.diagnostic.severity.ERROR,
+  })
+end)
+
+-- <leader>ca is deliberately not remapped: LazyVim binds it buffer-locally to
+-- vim.lsp.buf.code_action, which the fzf extra already routes through fzf-lua's
+-- ui_select. Same picker, so a global override would only lose to it anyway.
