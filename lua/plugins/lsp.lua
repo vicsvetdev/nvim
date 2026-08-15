@@ -22,6 +22,14 @@ return {
       -- toggle wins. Appended (not assigned) to keep LazyVim's other keys.
       local star = opts.servers["*"] or {}
       star.keys = star.keys or {}
+
+      -- LazyVim binds <leader>cc buffer-locally to Run Codelens on any server
+      -- advertising codeLens (vtsls does), which would beat the global
+      -- <leader>cc format mapping in config/keymaps.lua. Drop it so formatting
+      -- behaves the same in every buffer. <leader>cC still refreshes codelens.
+      star.keys = vim.tbl_filter(function(k)
+        return k[1] ~= "<leader>cc"
+      end, star.keys)
       table.insert(star.keys, {
         "K",
         function()

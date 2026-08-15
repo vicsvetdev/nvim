@@ -6,3 +6,17 @@
 --
 -- Or remove existing autocmds by their group name (which is prefixed with `lazyvim_` for the defaults)
 -- e.g. vim.api.nvim_del_augroup_by_name("lazyvim_wrap_spell")
+
+-- In Rust, make `>` close a `<>` pair. mini.pairs comes from LazyVim, so only
+-- this buffer-local mapping is carried over from the old mini.nvim config.
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("rust_angle_pairs", { clear = true }),
+  pattern = "rust",
+  callback = function(args)
+    require("mini.pairs").map_buf(args.buf, "i", ">", {
+      action = "close",
+      pair = "<>",
+      register = { bs = false, cr = false },
+    })
+  end,
+})

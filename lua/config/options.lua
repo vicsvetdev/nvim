@@ -23,3 +23,7 @@ vim.opt.updatetime = 50
 
 vim.g.dotnet_errors_only = true
 vim.g.dotnet_show_project_file = false
+
+-- Use the terraform parser for .tf files. Core API, so it needs no plugin and
+-- is safe to do this early.
+vim.treesitter.language.register("terraform", "tf")

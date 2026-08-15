@@ -29,6 +29,7 @@
   "matteblack.nvim": { "branch": "main", "commit": "a8a039f5d6189b28d76fa0221e64965efec7e996" },
   "miasma.nvim": { "branch": "main", "commit": "466456f08d1a114c983c0d24e8fc01339e3b0a27" },
   "mini.ai": { "branch": "main", "commit": "25248c6aa002391936a6200f12d1466015987133" },
+  "mini.cursorword": { "branch": "main", "commit": "d06a70d2779851b2119459943312a4215039b153" },
   "mini.icons": { "branch": "main", "commit": "98faae31e9be1cc054ae63485e58ceb185efcad0" },
   "mini.pairs": { "branch": "main", "commit": "b1c5a726921b7a8c9321e9a7a208aa0571de5810" },
   "monokai-pro.nvim": { "branch": "master", "commit": "5b06ae0736813b1c65d76a4be9edbe92be0b9c74" },

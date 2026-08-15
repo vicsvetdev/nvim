@@ -9,8 +9,11 @@ map("n", "<leader>e", "<cmd>Oil<CR>")
 
 map("n", "<leader>u", vim.cmd.UndotreeToggle)
 
-map("v", "J", ":m '>+1<CR>gv=gv")
-map("v", "K", ":m '<-2<CR>gv=gv")
+-- silent, or noice flashes its cmdline popup on every move. LazyVim's own
+-- mappings get this for free via LazyVim.safe_keymap_set; plain
+-- vim.keymap.set does not.
+map("v", "J", ":m '>+1<CR>gv=gv", { silent = true })
+map("v", "K", ":m '<-2<CR>gv=gv", { silent = true })
 
 map("n", "<C-d>", "<C-d>zz")
 map("n", "<C-u>", "<C-u>zz")
@@ -53,6 +56,25 @@ end, { noremap = true, silent = true })
 -- only; insert and visual mode keep it. LazyVim also offers [q and ]q.
 map("n", "<M-j>", "<cmd>cnext<CR>")
 map("n", "<M-k>", "<cmd>cprev<CR>")
+
+-- Format. LazyVim's own <leader>cf stays available; its buffer-local
+-- <leader>cc codelens binding is removed in lua/plugins/lsp.lua so this wins
+-- everywhere, not just in buffers without an LSP.
+map("n", "<leader>cc", function()
+  require("conform").format({
+    lsp_fallback = true,
+    async = false,
+    timeout_ms = 500,
+  })
+end, { desc = "Format code" })
+
+-- Git hunks (gitsigns ships with LazyVim on <leader>gh*; these are the old
+-- <leader>v* bindings).
+map("n", "<leader>vp", ":Gitsigns preview_hunk<CR>", { silent = true })
+map("n", "<leader>vr", ":Gitsigns reset_hunk<CR>", { silent = true })
+map("n", "<leader>vb", ":Gitsigns toggle_current_line_blame<CR>", { silent = true })
+map("n", "<leader>vn", ":Gitsigns next_hunk<CR>", { silent = true })
+map("n", "<leader>vN", ":Gitsigns prev_hunk<CR>", { silent = true })
 
 -- Navigation keymaps. These sit on top of the editor.fzf extra's own bindings,
 -- which stay available (<leader>ff, <leader>fr, <leader>sg, <leader><space>...).
