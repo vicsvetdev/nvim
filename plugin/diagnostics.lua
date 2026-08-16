@@ -90,9 +90,6 @@ function ToggleDiagnosticFloat()
   end
 end
 
--- H is mapped in lua/config/keymaps.lua (LazyVim's keymaps load after plugin/
--- and would clobber it with Prev Buffer).
-
 local virtual_text_enabled = true
 local virtual_text_opts = {
   prefix = "■",
@@ -111,4 +108,3 @@ function ToggleDiagnosticVirtualText()
   end
 end
 
--- J is mapped in lua/config/keymaps.lua, alongside H.

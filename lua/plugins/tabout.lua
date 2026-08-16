@@ -1,8 +1,6 @@
 return {
   {
     "abecodes/tabout.nvim",
-    -- The old LuaSnip/nvim-cmp dependencies are dropped: they were optional,
-    -- and LazyVim completes with blink.cmp.
     event = "InsertCharPre",
     priority = 1000,
     opts = {
@@ -29,10 +27,6 @@ return {
   },
 
   {
-    -- LazyVim appends its own <Tab> handler to blink unless one is already
-    -- present (`if not opts.keymap["<Tab>"]`), which would fight tabout.
-    -- Claiming the key with a plain fallback keeps snippet jumping while
-    -- letting tabout's mapping do the work.
     "saghen/blink.cmp",
     opts = {
       keymap = {

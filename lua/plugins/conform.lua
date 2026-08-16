@@ -1,6 +1,3 @@
--- Converted from the old `config = function` to `opts` so LazyVim's conform
--- wiring (its formatter registration and <leader>cf) survives.
--- <leader>cc is bound in lua/config/keymaps.lua.
 return {
   "stevearc/conform.nvim",
   opts = {

@@ -1,10 +1,3 @@
--- Deltas only. Deliberately not carried over from the old config:
---   keymap.preset = "default" -- LazyVim uses "enter"; changing it would
---                                alter Enter/Tab acceptance behaviour
---   version = "1.*"           -- fights LazyVim's pinned version
---   sources.default           -- identical to LazyVim's, which also declares
---                                opts_extend so extras can append to it
--- The <Tab> entry lives in lua/plugins/tabout.lua, next to what it's for.
 return {
   "saghen/blink.cmp",
   opts = {

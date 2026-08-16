@@ -1,11 +1,3 @@
--- The dap.core / test.core / lang.dotnet extras supply the plugins, the
--- netcoredbg adapter and the C# launch config. This file carries over what was
--- personal to the old lua/config/nvim-dap.lua and nvim-dap-ui.lua: the F-key
--- bindings, the breakpoint signs and the single-panel dap-ui layout.
---
--- Not carried over, because dap.core already does it:
---   * the dapui auto open/close listeners on initialized/terminated/exited
---   * <leader>dl (Run Last) and <leader>dr (Toggle REPL, was repl.open)
 return {
   {
     "mfussenegger/nvim-dap",
@@ -20,9 +12,6 @@ return {
   },
 
   {
-    -- dap.core defines its signs from LazyVim.config.icons.dap, so overriding
-    -- the icons is what sticks; a bare sign_define here would be overwritten
-    -- when dap loads.
     "LazyVim/LazyVim",
     opts = {
       icons = {
@@ -41,6 +30,7 @@ return {
       expand_lines = true,
       controls = { enabled = false }, -- no extra play/step buttons
       floating = { border = "rounded" },
+      -- Set dapui window
       render = {
         max_type_length = 60,
         max_value_lines = 200,
@@ -49,10 +39,10 @@ return {
       layouts = {
         {
           elements = {
-            { id = "scopes", size = 1.0 },
+            { id = "scopes", size = 1.0 }, -- 100% of this panel is scopes
           },
-          size = 15,
-          position = "bottom",
+          size = 15, -- height in lines (adjust to taste)
+          position = "bottom", -- "left", "right", "top", "bottom"
         },
       },
     },

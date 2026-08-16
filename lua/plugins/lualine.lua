@@ -1,4 +1,3 @@
--- Match the old mini.statusline layout: mode | diagnostics | path  ...  line|total
 return {
   "nvim-lualine/lualine.nvim",
   opts = function(_, opts)
