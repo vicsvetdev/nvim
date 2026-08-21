@@ -2,7 +2,22 @@
 -- Default keymaps that are always set: https://github.com/LazyVim/LazyVim/blob/main/lua/lazyvim/config/keymaps.lua
 -- Add any additional keymaps here
 
-local map = vim.keymap.set
+local mine = {}
+
+local function map(mode, lhs, rhs, opts)
+  table.insert(mine, { mode, lhs, rhs, opts })
+  vim.keymap.set(mode, lhs, rhs, opts)
+end
+
+vim.api.nvim_create_autocmd("User", {
+  pattern = "LazyLoad",
+  group = vim.api.nvim_create_augroup("my_keymaps_win", { clear = true }),
+  callback = function()
+    for _, m in ipairs(mine) do
+      vim.keymap.set(m[1], m[2], m[3], m[4])
+    end
+  end,
+})
 
 map("n", "<leader>re", "<cmd>e .<CR>")
 map("n", "<leader>e", "<cmd>Oil<CR>")
