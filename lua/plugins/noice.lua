@@ -51,6 +51,7 @@ return {
         },
       },
       mini = {
+        timeout = 6000,
         border = {
           style = "single",
           padding = { 0, 1 },

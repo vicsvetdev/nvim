@@ -42,5 +42,15 @@ return {
 
   { "Hoffs/omnisharp-extended-lsp.nvim", enabled = false },
 
-  { "seblyng/roslyn.nvim", opts = { filewatching = "roslyn" } },
+  {
+    "seblyng/roslyn.nvim",
+    opts = { filewatching = "roslyn" },
+    config = function(_, opts)
+      local dotnet_root = "/usr/share/dotnet"
+      if vim.uv.fs_stat(dotnet_root .. "/shared/Microsoft.NETCore.App") then
+        vim.lsp.config("roslyn", { cmd_env = { DOTNET_ROOT = dotnet_root } })
+      end
+      require("roslyn").setup(opts)
+    end,
+  },
 }
