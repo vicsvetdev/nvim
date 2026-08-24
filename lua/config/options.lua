@@ -7,6 +7,7 @@ vim.g.lazyvim_explorer = "snacks"
 
 vim.opt.number = true
 vim.opt.relativenumber = true
+vim.opt.cursorline = false
 
 vim.opt.tabstop = 4
 vim.opt.wrap = false
