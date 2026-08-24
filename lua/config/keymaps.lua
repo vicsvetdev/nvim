@@ -117,3 +117,8 @@ map("n", "<leader>gE", function()
     severity_limit = vim.diagnostic.severity.ERROR,
   })
 end)
+
+map("n", "<leader>ct", function()
+  vim.b.completion = vim.b.completion == false
+  vim.notify("Completion " .. (vim.b.completion and "enabled" or "disabled") .. " for this buffer")
+end, { desc = "Toggle completion (buffer)" })

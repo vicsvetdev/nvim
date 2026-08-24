@@ -18,3 +18,11 @@ vim.api.nvim_create_autocmd("FileType", {
     })
   end,
 })
+
+vim.api.nvim_create_autocmd("FileType", {
+  group = vim.api.nvim_create_augroup("no_completion_in_prose", { clear = true }),
+  pattern = { "text", "markdown", "gitcommit", "plaintex", "typst" },
+  callback = function(args)
+    vim.b[args.buf].completion = false
+  end,
+})
